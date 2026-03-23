@@ -17,7 +17,7 @@ export default function WhyAlkhaiPage() {
     <>
       <PageHero
         eyebrow="Why Alkhai"
-        title="Not another dashboard. Data backed clarity."
+        title="Not another dashboard. Evidence-first operations."
         description="We built Alkhai because we saw the same pattern everywhere: enterprises spending millions on tools that show data but never identify the one thing to fix."
       />
       <Differentiation />

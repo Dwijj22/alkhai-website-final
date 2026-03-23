@@ -113,7 +113,7 @@ export default function Home() {
             <div className="section-head">
               <div>
                 <div className="eyebrow"><span className="dot" /> Why Alkhai</div>
-                <h2>Not another dashboard. A data backed evidence.</h2>
+                <h2>Not another dashboard. Data-backed clarity.</h2>
               </div>
               <p className="fine" style={{ maxWidth: '54ch' }}>
                 We built Alkhai because we saw the same pattern everywhere: enterprises spending millions

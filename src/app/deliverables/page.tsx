@@ -15,9 +15,9 @@ export default function DeliverablesPage() {
   return (
     <>
       <PageHero
-        eyebrow="Deliverables"
+        eyebrow="What You Receive"
         title="What your leadership team receives."
-        description="These visuals represent the diagnostic outputs we deliver — not a software license or black-box tool. Clarity, ranked constraints, and a single 'start here' path."
+        description="We deliver diagnosttic outputs — not a software license or black-box tool. Clarity, ranked constraints, and a single 'start here' path."
       />
       <Platform />
       <CTABanner />

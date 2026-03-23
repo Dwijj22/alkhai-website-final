@@ -34,11 +34,6 @@ export default function CaseStudies() {
               </div>
               <h2>How Alkhai presents proof in a client-ready case study.</h2>
             </div>
-            <p className="fine" style={{ maxWidth: '58ch' }}>
-              The redesign brief calls for verified client outcomes. This section now uses the right
-              structure and is ready to be swapped with named or anonymized case metrics as soon as
-              they are approved for publication.
-            </p>
           </div>
         </AnimatedSection>
 

@@ -141,7 +141,8 @@ export default function Platform() {
                 <span className="pill">
                   <i className="fa-solid fa-layer-group" aria-hidden />
                   <span>
-                    <b>Tool-agnostic:</b> integrates with your stack
+                    <b>Our diagnostics work with the tools you already run</b> <br></br>
+                    <b>No new platform required</b>
                   </span>
                 </span>
               </div>
