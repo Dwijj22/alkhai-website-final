@@ -155,8 +155,12 @@ export default function ProcessHeatmap() {
   }, [mouse]);
 
   return (
-    <div ref={containerRef} className="absolute inset-0 z-0">
-      <canvas ref={canvasRef} className="absolute inset-0" />
+    <div
+      ref={containerRef}
+      className="relative z-0"
+      style={{ width: '100%', height: 420, overflow: 'visible' }}
+    >
+      <canvas ref={canvasRef} className="absolute inset-0" style={{ overflow: 'visible' }} />
     </div>
   );
 }

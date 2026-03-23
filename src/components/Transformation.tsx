@@ -137,11 +137,11 @@ export default function Transformation() {
           <div className="section-head" style={{ marginBottom: 36 }}>
             <div>
               <div className="eyebrow"><span className="dot" /> The Impact</div>
-              <h2>What Alkhai measures once a bottleneck is exposed.</h2>
+              <h2>What a constraint-first diagnostic typically uncovers.</h2>
             </div>
             <p className="fine" style={{ maxWidth: '52ch' }}>
-              These are the operating signals a constraint-first diagnostic tracks: throughput,
-              cycle time, rework, SLA performance, leakage, and deadline reliability.
+              Illustrative ranges based on common bottleneck patterns — not attributed to a
+              specific engagement. Actual results depend on workflow complexity and data quality.
             </p>
           </div>
         </AnimatedSection>
@@ -216,7 +216,6 @@ export default function Transformation() {
             </AnimatedSection>
           ))}
         </div>
-
       </div>
     </section>
   );

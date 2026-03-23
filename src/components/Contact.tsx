@@ -34,13 +34,6 @@ export default function Contact() {
       <div className="container">
         <AnimatedSection>
           <div className="section-head">
-            <div>
-              <div className="eyebrow">
-                <span className="dot" />
-                Contact Us
-              </div>
-              <h2>Request a Bottleneck Scan.</h2>
-            </div>
             <p className="fine" style={{ maxWidth: '60ch' }}>
               Tell us about the workflow you want to improve and where work is stalling. We&apos;ll
               respond with a scoped bottleneck scan and a data-focused plan.
@@ -109,23 +102,6 @@ export default function Contact() {
                   </div>
                 </div>
 
-                <p className="fine" style={{ marginTop: 14 }}>
-                  Prefer email?{' '}
-                  <a
-                    className="link-chip"
-                    href="mailto:contact@alkhai.com?subject=Request%20a%20Bottleneck%20Scan"
-                  >
-                    contact@alkhai.com
-                  </a>{' '}
-                  <a
-                    className="link-chip book-cta"
-                    href={CALENDLY_URL}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                  >
-                    <i className="fa-solid fa-calendar" aria-hidden /> Book a 30-minute intro
-                  </a>
-                </p>
               </div>
             </div>
 
@@ -161,16 +137,36 @@ export default function Contact() {
                 />
               </label>
               <label>
-                What problem are you trying to solve?
+                Describe the workflow and where work is stalling
                 <textarea
                   name="message"
-                  placeholder="What problem are you trying to solve?"
+                  placeholder="Describe the workflow and where work is stalling"
                 />
               </label>
               <button className="btn primary" type="submit">
                 <i className="fa-solid fa-paper-plane" aria-hidden /> Request a Scan
               </button>
-              <div className="fine">No platform changes. Read-only access. NDA available.</div>
+              <p
+                className="fine"
+                style={{ marginTop: 16, textAlign: 'center', color: 'rgba(199,206,217,0.6)' }}
+              >
+                Or reach us directly —{' '}
+                <a
+                  href="mailto:contact@alkhai.com?subject=Request%20a%20Bottleneck%20Scan"
+                  style={{ color: 'var(--electric)' }}
+                >
+                  contact@alkhai.com
+                </a>{' '}
+                or{' '}
+                <a
+                  href={CALENDLY_URL}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  style={{ color: 'var(--electric)' }}
+                >
+                  book a 30-minute intro
+                </a>
+              </p>
               <div
                 className={`form-success${showSuccess ? ' show' : ''}`}
                 id="form-success"

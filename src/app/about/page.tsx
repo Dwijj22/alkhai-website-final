@@ -59,9 +59,10 @@ export default function AboutPage() {
                   <b>Our Mission</b>
                 </div>
                 <p>
-                  To give every business — from growth-stage SMBs to large enterprises — the ability to see
-                  where their operations actually break down, and the clarity to fix the one thing that
-                  matters most. No more million-dollar dashboards that show data but never change outcomes.
+                  To give every business the ability to see where their operations actually
+                  break down — and the clarity to fix the one thing that matters most.
+                  Not dashboards that show data. A precise, ranked plan to remove the
+                  constraint that is limiting total throughput.
                 </p>
               </div>
             </AnimatedSection>
@@ -72,9 +73,10 @@ export default function AboutPage() {
                   <b>Why We Exist</b>
                 </div>
                 <p>
-                  We watched enterprises spend millions on broad transformation programs that optimized
-                  everything except the one thing that mattered. The Theory of Constraints isn&apos;t new —
-                  but applying it with real event data at scale is. That&apos;s what Alkhai does.
+                  The Theory of Constraints has existed for decades. What hasn&apos;t existed
+                  is a way to apply it using real event data from the systems a business
+                  already runs — without a months-long engagement or a new platform.
+                  That&apos;s the gap Alkhai was built to close.
                 </p>
               </div>
             </AnimatedSection>
@@ -146,6 +148,20 @@ export default function AboutPage() {
               </AnimatedSection>
             ))}
           </div>
+
+          <AnimatedSection delay={0.5}>
+            <p className="fine" style={{
+              textAlign: 'center',
+              maxWidth: '58ch',
+              margin: '40px auto 0',
+              fontSize: '1rem',
+              lineHeight: 1.75,
+            }}>
+              Most businesses we work with are already somewhere in this cycle without
+              knowing it — stuck optimising around a constraint that hasn&apos;t been
+              identified yet. The scan finds it.
+            </p>
+          </AnimatedSection>
         </div>
       </section>
 

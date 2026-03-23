@@ -42,7 +42,7 @@ export default function Differentiation() {
             <div>
               <div className="eyebrow">
                 <span className="dot" />
-                Differentiation
+                A different starting point
               </div>
               <h2>Alkhai vs traditional operations consulting programs</h2>
             </div>

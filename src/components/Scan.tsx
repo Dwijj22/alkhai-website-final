@@ -16,8 +16,7 @@ export default function Scan() {
                 The Audit
               </div>
               <h2>
-                A Bottleneck Scan — built for SMB owners and operators who need throughput gains fast, without
-                platform changes.
+                A fixed-scope diagnostic. Evidence-first. No platform changes.
               </h2>
             </div>
             <div>
@@ -55,6 +54,10 @@ export default function Scan() {
                   <span>Outputs</span>
                   <p className="fine">Executive readout, slide deck, ranked constraints, and implementation roadmap.</p>
                 </div>
+                <div className="case-study-item">
+                  <span>Investment</span>
+                  <p className="fine">Fixed-fee engagement — contact for a scoped quote based on workflow complexity.</p>
+                </div>
               </div>
             </div>
 
@@ -69,6 +72,8 @@ export default function Scan() {
                 We scope the workflow, confirm data viability, and align on the operating question:
                 where is work stalling, and what should the team fix first?
               </p>
+              <p className="fine" style={{ marginBottom: 14 }}>
+We scope every engagement before it starts — confirming data viability and aligning on the exact operating question before you invest.              </p>
               <a className="btn primary" href={CALENDLY_URL} target="_blank" rel="noreferrer noopener">
                 <i className="fa-regular fa-calendar" aria-hidden /> Book a scoping call
               </a>
@@ -150,56 +155,6 @@ export default function Scan() {
         </AnimatedSection>
 
         <AnimatedSection delay={0.18}>
-          <div className="panel soft" style={{ marginTop: 16 }}>
-            <h3>How it works</h3>
-            <div className="steps" style={{ marginTop: 12 }}>
-              <div className="step step-rail">
-                <div className="step-number" aria-hidden>
-                  01
-                </div>
-                <div>
-                  <p>
-                    <b>Connect + ingest</b>
-                  </p>
-                  <p className="fine" style={{ marginTop: 6 }}>
-                    Secure access to the systems that already record work — tickets, orders, CRM stages, and
-                    operational logs — normalized into an analyzable timeline.
-                  </p>
-                </div>
-              </div>
-              <div className="step step-rail">
-                <div className="step-number" aria-hidden>
-                  02
-                </div>
-                <div>
-                  <p>
-                    <b>Quantify + rank</b>
-                  </p>
-                  <p className="fine" style={{ marginTop: 6 }}>
-                    Reconstruct flows, measure queues and rework, and rank constraints by throughput impact
-                    with a clear time-and-cost model.
-                  </p>
-                </div>
-              </div>
-              <div className="step step-rail">
-                <div className="step-number" aria-hidden>
-                  03
-                </div>
-                <div>
-                  <p>
-                    <b>Executive readout</b>
-                  </p>
-                  <p className="fine" style={{ marginTop: 6 }}>
-                    A concise walkthrough of what is stalling work, what to fix first, and a 30–60 day roadmap
-                    your team can execute without a platform swap.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </AnimatedSection>
-
-        <AnimatedSection delay={0.22}>
           <div className="panel" style={{ marginTop: 16 }}>
             <div className="section-head" style={{ marginBottom: 20 }}>
               <div>
@@ -212,10 +167,22 @@ export default function Scan() {
             </div>
             <div className="steps" style={{ marginTop: 0 }}>
               {[
-                ['Week 1', 'Scope the workflow, confirm access, and validate the event-data fields needed for analysis.'],
-                ['Week 2', 'Reconstruct the as-is flow, identify queues, and isolate the highest-friction wait states.'],
-                ['Week 3', 'Rank constraints by throughput impact, quantify leakage, and stress-test the leading hypotheses.'],
-                ['Week 4+', 'Deliver the readout, action roadmap, and owner-linked execution path for the next 30-60 days.'],
+                [
+                  'Week 1 — Connect + Ingest',
+                  'Scope the workflow, confirm access, and validate event-data fields. Secure read-only access to the systems that record work — tickets, orders, CRM stages, operational logs — normalized into an analyzable timeline.',
+                ],
+                [
+                  'Week 2 — Reconstruct the Flow',
+                  'Rebuild the as-is process from timestamps and events. Identify queues, isolate the highest-friction wait states, and map real-world variants — including the paths that actually happen, not the documented ones.',
+                ],
+                [
+                  'Week 3 — Rank Constraints',
+                  'Score bottlenecks by throughput impact, quantify time and cost leakage, and stress-test the leading hypotheses against the event data.',
+                ],
+                [
+                  'Week 4+ — Executive Readout',
+                  'Deliver the readout, ranked action roadmap, and owner-linked execution path for the next 30–60 days. No platform swap required to act on the findings.',
+                ],
               ].map(([title, text], index) => (
                 <div className="step step-rail" key={title}>
                   <div className="step-number" aria-hidden>
@@ -231,7 +198,7 @@ export default function Scan() {
           </div>
         </AnimatedSection>
 
-        <AnimatedSection delay={0.26}>
+        <AnimatedSection delay={0.22}>
           <div id="scan-faq" className="panel" style={{ marginTop: 16 }}>
             <div className="section-head" style={{ marginBottom: 18 }}>
               <div>
@@ -246,6 +213,8 @@ export default function Scan() {
               {[
                 ['Do you need a new platform?', 'No. The scan is designed to work with the systems you already run.'],
                 ['What access is required?', 'Read-only access to one to three systems with usable timestamps or event histories.'],
+                ['What if our event data quality is poor?', "We assess data viability during the scoping call. If the data can't support constraint analysis, we tell you before you invest — you don't proceed to a full scan."],
+                ['What if you don\'t find anything actionable?', "If we can't identify a constraint with sufficient evidence to quantify, we don't deliver a recommendation you can't act on. Our commercial structure reflects this commitment."],
                 ['How disruptive is the work?', 'Low disruption. Most of the work happens in the data and readout layer, not through workshops.'],
                 ['What happens after the readout?', 'Your team gets a ranked action plan with owners, sequence, and the first moves to make.'],
               ].map(([question, answer]) => (
@@ -255,13 +224,6 @@ export default function Scan() {
                 </div>
               ))}
             </div>
-          </div>
-        </AnimatedSection>
-
-        <AnimatedSection delay={0.3}>
-          <div className="trust-note">
-            <span className="trust-dot" aria-hidden />
-            Designed by operators and process analysts who have worked inside real, deadline-driven environments.
           </div>
         </AnimatedSection>
       </div>
