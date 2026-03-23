@@ -5,6 +5,7 @@ import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import GlobalParticleMesh from '@/components/graphics/GlobalParticleMesh';
 import ProcessReport from '@/components/ProcessReport';
+import { defaultMetadata } from '@/lib/metadata';
 
 const sora = Sora({
   subsets: ['latin'],
@@ -21,25 +22,16 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
-  title: {
-    default: 'Alkhai — Operational Intelligence',
-    template: '%s | Alkhai',
-  },
-  description:
-    'Alkhai helps businesses find and remove process bottlenecks using real event data and targeted automation.',
+  ...defaultMetadata,
   icons: {
     icon: [
-      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-      { url: '/favicon-48x48.png', sizes: '48x48', type: 'image/png' },
+      { url: '/AlkhaiFavicon.png?v=20260322', sizes: '440x440', type: 'image/png' },
+      { url: '/favicon-16x16.png?v=20260322', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png?v=20260322', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-48x48.png?v=20260322', sizes: '48x48', type: 'image/png' },
     ],
-    shortcut: '/favicon-32x32.png',
-    apple: { url: '/apple-touch-icon.png', sizes: '180x180' },
-  },
-  openGraph: {
-    title: 'Alkhai — Operational Intelligence',
-    description: 'Find and remove the bottlenecks bleeding time and money from your operations.',
-    type: 'website',
+    shortcut: '/AlkhaiFavicon.png?v=20260322',
+    apple: { url: '/apple-touch-icon.png?v=20260322', sizes: '180x180' },
   },
 };
 
@@ -67,11 +59,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           fontFamily: 'var(--font-sora), "Sora", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif',
         }}
       >
+        <a className="skip-link" href="#main-content">
+          Skip to content
+        </a>
         <GlobalParticleMesh />
         <div className="blob one" aria-hidden="true" />
         <div className="blob two" aria-hidden="true" />
         <Nav />
-        <main>{children}</main>
+        <main id="main-content">{children}</main>
         <Footer />
         <ProcessReport />
       </body>

@@ -42,45 +42,72 @@ export default function Platform() {
                 End-to-end flow reconstructed from timestamps and events — including real-world branches, skips,
                 and the paths that actually happen in production.
               </p>
-              <div className="spark" style={{ height: 220, marginTop: 14 }}>
-                <svg viewBox="0 0 700 220" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+              <div className="spark" style={{ height: 160, marginTop: 12 }} aria-hidden="true">
+                <svg viewBox="0 0 700 220" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
                   <defs>
-                    <linearGradient id="pf-path" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stopColor="rgba(91,140,255,0.35)" />
-                      <stop offset="100%" stopColor="rgba(61,220,151,0.25)" />
+                    <linearGradient id="g2" x1="0" x2="1" y1="0" y2="0">
+                      <stop offset="0%" stopColor="rgba(91,140,255,0.85)" />
+                      <stop offset="1%" stopColor="rgba(255,176,32,0.90)" />
                     </linearGradient>
                   </defs>
+                  <circle cx="90" cy="120" r="14" fill="rgba(61,220,151,0.95)" />
+                  <circle cx="260" cy="90" r="14" fill="rgba(91,140,255,0.95)" />
+                  <circle cx="260" cy="150" r="14" fill="rgba(91,140,255,0.70)" />
+                  <circle cx="450" cy="120" r="14" fill="rgba(255,176,32,0.95)" />
+                  <circle cx="620" cy="120" r="14" fill="rgba(61,220,151,0.95)" />
                   <path
-                    d="M 70 110 L 150 110 L 200 90 L 260 110 L 320 110 L 360 130 L 420 100 L 480 95 L 540 105 L 610 110"
-                    stroke="url(#pf-path)"
-                    strokeWidth="3"
+                    d="M104,120 C160,120 200,96 246,90"
+                    stroke="url(#g2)"
+                    strokeWidth="4"
+                    fill="none"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
                   <path
-                    d="M 200 90 L 200 125 L 360 130"
-                    stroke="rgba(255,176,32,0.45)"
-                    strokeWidth="2"
-                    strokeDasharray="6 6"
+                    d="M104,120 C160,120 200,144 246,150"
+                    stroke="rgba(91,140,255,0.52)"
+                    strokeWidth="4"
+                    fill="none"
+                    strokeDasharray="8 8"
                     strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
-                  <circle cx="70" cy="110" r="18" fill="#3DDC97" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
-                  <circle cx="200" cy="90" r="14" fill="#5B8CFF" stroke="rgba(255,255,255,0.2)" strokeWidth="2" />
-                  <circle cx="320" cy="110" r="14" fill="#5B8CFF" stroke="rgba(255,255,255,0.2)" strokeWidth="2" />
-                  <circle cx="380" cy="130" r="24" fill="#FFB020" stroke="rgba(255,255,255,0.35)" strokeWidth="2" />
-                  <circle cx="480" cy="95" r="14" fill="#5B8CFF" stroke="rgba(255,255,255,0.2)" strokeWidth="2" />
-                  <circle cx="610" cy="110" r="18" fill="#3DDC97" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
+                  <path
+                    d="M274,90 C330,88 380,115 436,120"
+                    stroke="url(#g2)"
+                    strokeWidth="5"
+                    fill="none"
+                  />
+                  <path
+                    d="M274,150 C330,152 380,125 436,120"
+                    stroke="rgba(255,176,32,0.35)"
+                    strokeWidth="4"
+                    fill="none"
+                    strokeDasharray="8 8"
+                  />
+                  <path
+                    d="M464,120 C510,120 560,120 606,120"
+                    stroke="rgba(61,220,151,0.85)"
+                    strokeWidth="5"
+                    fill="none"
+                  />
                   <text
-                    x="380"
-                    y="188"
-                    textAnchor="middle"
-                    fill="rgba(255,255,255,0.88)"
-                    fontSize="13"
-                    fontFamily="Sora, system-ui, sans-serif"
+                    x="438"
+                    y="72"
+                    fill="rgba(255,255,255,0.85)"
+                    fontSize="22"
                     fontWeight="700"
                   >
                     Bottleneck
                   </text>
+                  <line
+                    x1="450"
+                    y1="78"
+                    x2="450"
+                    y2="106"
+                    stroke="rgba(255,176,32,0.85)"
+                    strokeWidth="3"
+                  />
                 </svg>
               </div>
             </div>

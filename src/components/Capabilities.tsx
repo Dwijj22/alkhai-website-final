@@ -46,10 +46,6 @@ export default function Capabilities() {
                 We analyze operations from intake through handoffs — how work actually moves across teams and systems —
                 then isolate the few constraints that drain throughput, inflate cost, and extend customer wait time.
               </p>
-              <p className="fine" style={{ marginTop: 10 }}>
-                Ranges shown are typical outcomes observed across operations; actual results depend on process
-                complexity and data availability.
-              </p>
             </div>
           </div>
         </AnimatedSection>

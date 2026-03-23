@@ -10,18 +10,6 @@ interface Dot {
   layer: number;
 }
 
-interface Ripple {
-  x: number; y: number;
-  radius: number;
-  strength: number;
-  alpha: number;
-}
-
-interface TrailPoint {
-  x: number; y: number;
-  alpha: number;
-}
-
 interface AuroraWave {
   offset: number;
   speed: number;
@@ -44,14 +32,37 @@ export default function GlobalParticleMesh() {
     let w = 0, h = 0;
     let animId: number;
     let mx = -1000, my = -1000;
-    let mouseDown = false;
     let scrollY = 0;
     let pageHeight = 1;
     let time = 0;
     let dots: Dot[] = [];
-    let ripples: Ripple[] = [];
-    let trail: TrailPoint[] = [];
     let auroras: AuroraWave[] = [];
+
+    const CONTENT_BLOCKERS = [
+      'nav',
+      'footer',
+      'button',
+      'a',
+      'input',
+      'textarea',
+      'select',
+      'label',
+      'form',
+      'table',
+      '.panel',
+      '.card',
+      '.metric',
+      '.step',
+      '.cta-box',
+      '.section-head',
+      '.hero-copy',
+      '.hero-visual',
+      '.form',
+      '.link-chip',
+      '.process-report-btn',
+      '.process-report-popup',
+      '.marquee-container',
+    ].join(', ');
 
     const resize = () => {
       w = window.innerWidth;
@@ -105,24 +116,19 @@ export default function GlobalParticleMesh() {
       return { r: Math.round(255 + (91 - 255) * t), g: Math.round(176 + (140 - 176) * t), b: Math.round(32 + (255 - 32) * t) };
     };
 
-    const onMove = (e: MouseEvent) => {
-      const prevX = mx, prevY = my;
-      mx = e.clientX; my = e.clientY;
-      if (prevX > -500) {
-        const speed = Math.sqrt((mx - prevX) ** 2 + (my - prevY) ** 2);
-        if (speed > 2) {
-          trail.push({ x: mx, y: my, alpha: 0.4 });
-          if (trail.length > 20) trail.shift();
-        }
-      }
-    };
-    const onLeave = () => { mx = -1000; my = -1000; mouseDown = false; };
-    const onDown = () => { mouseDown = true; };
-    const onUp = () => { mouseDown = false; };
+    const shouldIgnoreInteraction = (target: EventTarget | null) =>
+      target instanceof Element && Boolean(target.closest(CONTENT_BLOCKERS));
 
-    const onClick = (e: MouseEvent) => {
-      ripples.push({ x: e.clientX, y: e.clientY, radius: 0, strength: 80, alpha: 0.5 });
+    const onMove = (e: MouseEvent) => {
+      if (shouldIgnoreInteraction(e.target)) {
+        mx = -1000;
+        my = -1000;
+        return;
+      }
+      mx = e.clientX;
+      my = e.clientY;
     };
+    const onLeave = () => { mx = -1000; my = -1000; };
 
     const onScroll = () => {
       scrollY = window.scrollY;
@@ -158,50 +164,6 @@ export default function GlobalParticleMesh() {
         ctx.fill();
       });
 
-      // --- Trail ---
-      trail.forEach((tp) => {
-        tp.alpha -= 0.012;
-        if (tp.alpha > 0.01) {
-          const grad = ctx.createRadialGradient(tp.x, tp.y, 0, tp.x, tp.y, 30);
-          grad.addColorStop(0, `rgba(${baseColor.r},${baseColor.g},${baseColor.b},${(tp.alpha * 0.15).toFixed(3)})`);
-          grad.addColorStop(1, `rgba(${baseColor.r},${baseColor.g},${baseColor.b},0)`);
-          ctx.beginPath();
-          ctx.arc(tp.x, tp.y, 30, 0, Math.PI * 2);
-          ctx.fillStyle = grad;
-          ctx.fill();
-        }
-      });
-      trail = trail.filter((tp) => tp.alpha > 0.01);
-
-      // --- Ripples ---
-      ripples.forEach((rip) => {
-        rip.radius += 6;
-        rip.alpha -= 0.012;
-        if (rip.alpha > 0.01) {
-          ctx.beginPath();
-          ctx.arc(rip.x, rip.y, rip.radius, 0, Math.PI * 2);
-          ctx.strokeStyle = `rgba(${baseColor.r},${baseColor.g},${baseColor.b},${(rip.alpha * 0.3).toFixed(3)})`;
-          ctx.lineWidth = 1.5;
-          ctx.stroke();
-        }
-      });
-      ripples = ripples.filter((r) => r.alpha > 0.01);
-
-      // --- Gravity well glow when holding ---
-      if (hasMouse && mouseDown) {
-        const wellCol = getScrollColor(scrollPct, 0.5);
-        for (let i = 3; i >= 1; i--) {
-          const r = 50 * i;
-          const grad = ctx.createRadialGradient(mx, my, 0, mx, my, r);
-          grad.addColorStop(0, `rgba(${wellCol.r},${wellCol.g},${wellCol.b},${(0.04 / i).toFixed(3)})`);
-          grad.addColorStop(1, `rgba(${wellCol.r},${wellCol.g},${wellCol.b},0)`);
-          ctx.beginPath();
-          ctx.arc(mx, my, r, 0, Math.PI * 2);
-          ctx.fillStyle = grad;
-          ctx.fill();
-        }
-      }
-
       // --- Update dots ---
       dots.forEach((d) => {
         d.bx += d.vx;
@@ -219,41 +181,16 @@ export default function GlobalParticleMesh() {
           const dy = d.by - my;
           const dist = Math.sqrt(dx * dx + dy * dy);
 
-          if (mouseDown) {
-            // Attract toward cursor (gravity well)
-            if (dist < 300 && dist > 5) {
-              const force = (1 - dist / 300) * 70 * reactMult;
-              const angle = Math.atan2(dy, dx);
-              tx -= Math.cos(angle) * force;
-              ty -= Math.sin(angle) * force;
-            }
-          } else {
-            // Repel from cursor
-            if (dist < 200) {
-              const force = (1 - dist / 200) * 55 * reactMult;
-              const angle = Math.atan2(dy, dx);
-              tx += Math.cos(angle) * force;
-              ty += Math.sin(angle) * force;
-            }
-          }
-        }
-
-        ripples.forEach((rip) => {
-          const dx = d.bx - rip.x;
-          const dy = d.by - rip.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          const ringDist = Math.abs(dist - rip.radius);
-          if (ringDist < 60) {
-            const force = (1 - ringDist / 60) * rip.strength * rip.alpha * reactMult;
+          if (dist < 200) {
+            const force = (1 - dist / 200) * 55 * reactMult;
             const angle = Math.atan2(dy, dx);
             tx += Math.cos(angle) * force;
             ty += Math.sin(angle) * force;
           }
-        });
+        }
 
-        const ease = mouseDown ? 0.04 : 0.07;
-        d.x += (tx - d.x) * ease;
-        d.y += (ty - d.y) * ease;
+        d.x += (tx - d.x) * 0.07;
+        d.y += (ty - d.y) * 0.07;
       });
 
       // --- Draw dots by layer ---
@@ -264,7 +201,6 @@ export default function GlobalParticleMesh() {
         const isBack = layerIdx === 0;
         const connDist = isBack ? 100 : 140;
         const lineAlpha = isBack ? 0.03 : 0.07;
-        const lineAlphaHold = isBack ? 0.05 : 0.12;
 
         for (let i = 0; i < layerDots.length; i++) {
           const a = layerDots[i];
@@ -281,9 +217,7 @@ export default function GlobalParticleMesh() {
                 const dm = Math.sqrt((mx - midX) ** 2 + (my - midY) ** 2);
                 lineBoost = Math.max(0, 1 - dm / 200);
               }
-              const alpha = mouseDown
-                ? lineAlphaHold * (1 - dist / connDist) + lineBoost * 0.08
-                : lineAlpha * (1 - dist / connDist) + lineBoost * 0.04;
+              const alpha = lineAlpha * (1 - dist / connDist) + lineBoost * 0.04;
 
               ctx.beginPath();
               ctx.moveTo(a.x, a.y);
@@ -301,7 +235,7 @@ export default function GlobalParticleMesh() {
             const dx = mx - d.x;
             const dy = my - d.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
-            proximity = Math.max(0, 1 - dist / (mouseDown ? 300 : 200));
+            proximity = Math.max(0, 1 - dist / 200);
           }
           const r = d.size + proximity * (isBack ? 1.5 : 3);
           const col = getScrollColor(scrollPct, proximity);
@@ -313,19 +247,11 @@ export default function GlobalParticleMesh() {
           ctx.arc(d.x, d.y, r, 0, Math.PI * 2);
           ctx.fillStyle = `rgba(${col.r},${col.g},${col.b},${dotAlpha.toFixed(2)})`;
           ctx.fill();
-
-          if (mouseDown && proximity > 0.5 && !isBack) {
-            ctx.beginPath();
-            ctx.arc(d.x, d.y, r + 3, 0, Math.PI * 2);
-            ctx.strokeStyle = `rgba(${col.r},${col.g},${col.b},${(proximity * 0.25).toFixed(2)})`;
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
-          }
         });
       });
 
       // --- Cursor glow ---
-      if (hasMouse && !mouseDown) {
+      if (hasMouse) {
         const glowCol = getScrollColor(scrollPct, 0.5);
         const grad = ctx.createRadialGradient(mx, my, 0, mx, my, 140);
         grad.addColorStop(0, `rgba(${glowCol.r},${glowCol.g},${glowCol.b},0.025)`);
@@ -343,18 +269,12 @@ export default function GlobalParticleMesh() {
     animId = requestAnimationFrame(draw);
     window.addEventListener('resize', resize);
     window.addEventListener('mousemove', onMove, { passive: true });
-    window.addEventListener('mousedown', onDown);
-    window.addEventListener('mouseup', onUp);
-    window.addEventListener('click', onClick);
     window.addEventListener('scroll', onScroll, { passive: true });
     document.addEventListener('mouseleave', onLeave);
     return () => {
       cancelAnimationFrame(animId);
       window.removeEventListener('resize', resize);
       window.removeEventListener('mousemove', onMove);
-      window.removeEventListener('mousedown', onDown);
-      window.removeEventListener('mouseup', onUp);
-      window.removeEventListener('click', onClick);
       window.removeEventListener('scroll', onScroll);
       document.removeEventListener('mouseleave', onLeave);
     };

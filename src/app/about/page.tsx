@@ -2,8 +2,14 @@ import type { Metadata } from 'next';
 import PageHero from '@/components/PageHero';
 import AnimatedSection from '@/components/AnimatedSection';
 import CTABanner from '@/components/CTABanner';
+import { createPageMetadata } from '@/lib/metadata';
 
-export const metadata: Metadata = { title: 'About Us' };
+export const metadata: Metadata = createPageMetadata({
+  title: 'About Us',
+  description:
+    'Learn why Alkhai applies Theory of Constraints with event-data evidence, read-only access, and an operator-led diagnostic model.',
+  path: '/about',
+});
 
 const VALUES = [
   {
@@ -25,6 +31,11 @@ const VALUES = [
     icon: 'fa-solid fa-bullseye',
     title: 'Outcome-Linked',
     text: 'We tie every recommendation to specific queues, handoffs, and loop drivers with projected time and cost impact. If we can\'t find actionable constraints, you don\'t proceed.',
+  },
+  {
+    icon: 'fa-solid fa-user-shield',
+    title: 'Client-Protective',
+    text: 'Data minimization, NDA-ready workflows, and least-privilege access are built into the engagement from the start. We ask for only what the diagnostic requires.',
   },
 ];
 
@@ -83,7 +94,7 @@ export default function AboutPage() {
             </div>
           </AnimatedSection>
 
-          <div className="grid-2">
+          <div className="principles-grid">
             {VALUES.map((v, i) => (
               <AnimatedSection key={v.title} delay={i * 0.08}>
                 <div className="panel" style={{ height: '100%' }}>
@@ -125,8 +136,8 @@ export default function AboutPage() {
               { num: '05', title: 'Repeat', text: 'Once removed, a new constraint emerges. The cycle continues — each iteration unlocking the next level of performance.' },
             ].map((step, i) => (
               <AnimatedSection key={step.num} delay={i * 0.08}>
-                <div className="step">
-                  <div className="badge">{step.num}</div>
+                <div className="step step-rail">
+                  <div className="step-number">{step.num}</div>
                   <div>
                     <b>{step.title}</b>
                     <p className="fine">{step.text}</p>

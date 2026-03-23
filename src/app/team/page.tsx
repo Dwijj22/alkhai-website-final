@@ -1,37 +1,40 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import PageHero from '@/components/PageHero';
 import AnimatedSection from '@/components/AnimatedSection';
 import CTABanner from '@/components/CTABanner';
+import { createPageMetadata } from '@/lib/metadata';
+import { FOUNDER_LINKEDIN_URL } from '@/lib/constants';
 
-export const metadata: Metadata = { title: 'Our Team' };
+export const metadata: Metadata = createPageMetadata({
+  title: 'Our Team',
+  description:
+    'Meet the founder behind Alkhai and the operator, analytics, and systems talent network supporting each diagnostic engagement.',
+  path: '/team',
+});
 
 const TEAM = [
   {
-    initials: 'DR',
     name: 'Dwij Ravikumar',
     role: 'Founder & CEO',
-    bio: 'Built Alkhai after years of watching enterprises throw millions at broad transformations that never identified the one constraint that mattered. Background in operations, process analysis, and data-driven diagnostics.',
-    color: 'var(--electric)',
+    bio: 'Built Alkhai after working across operations, analytics, and process improvement environments where teams had plenty of reporting but not enough diagnostic clarity. Focused on event-data analysis, constraint ranking, and execution plans that operating teams can use immediately.',
   },
 ];
 
 const ADVISORS = [
   {
-    initials: 'OP',
-    name: 'Operations & Process',
-    description: 'Practitioners with hands-on experience in IT operations, service delivery, and process analysis across enterprise and SMB environments.',
+    name: 'Operations & Process Leaders',
+    description: 'Our network includes practitioners from IT operations, service delivery, finance operations, and workflow design roles who have led deadline-driven execution inside real operating teams.',
     icon: 'fa-solid fa-cogs',
   },
   {
-    initials: 'DA',
-    name: 'Data & Analytics',
-    description: 'Specialists in event-log mining, process mining, and constraint analysis who turn raw operational data into actionable intelligence.',
+    name: 'Data & Analytics Specialists',
+    description: 'We work with analysts experienced in event-log interpretation, process mining, queue analysis, and translating operational data into decisions leaders can trust.',
     icon: 'fa-solid fa-chart-bar',
   },
   {
-    initials: 'SI',
-    name: 'Systems Integration',
-    description: 'Engineers experienced with ServiceNow, Jira, Zendesk, CRM/ERP platforms, and building read-only data pipelines at scale.',
+    name: 'Systems Integration Engineers',
+    description: 'Our network includes engineers familiar with ServiceNow, Jira, Zendesk, CRM and ERP environments, and secure read-only data collection patterns.',
     icon: 'fa-solid fa-plug',
   },
 ];
@@ -59,15 +62,15 @@ export default function TeamPage() {
 
           {TEAM.map((member, i) => (
             <AnimatedSection key={member.name} delay={i * 0.1}>
-              <div className="panel" style={{ display: 'grid', gridTemplateColumns: '80px 1fr', gap: 20, alignItems: 'start' }}>
-                <div style={{
-                  width: 80, height: 80, borderRadius: 18,
-                  background: `linear-gradient(135deg, ${member.color}, var(--teal))`,
-                  display: 'grid', placeItems: 'center',
-                  fontSize: '1.5rem', fontWeight: 800, color: '#fff',
-                  border: '1px solid rgba(255,255,255,0.1)',
-                }}>
-                  {member.initials}
+              <div className="panel founder-panel">
+                <div className="founder-photo-wrap">
+                  <Image
+                    src="/dwij-founder.jpeg"
+                    alt="Dwij Ravikumar"
+                    width={320}
+                    height={320}
+                    className="founder-photo"
+                  />
                 </div>
                 <div>
                   <b style={{ fontSize: '1.2rem', display: 'block', marginBottom: 4 }}>{member.name}</b>
@@ -75,6 +78,16 @@ export default function TeamPage() {
                     {member.role}
                   </span>
                   <p className="fine">{member.bio}</p>
+                  <p className="fine" style={{ marginTop: 12 }}>
+                    Alkhai was built to help operators answer one practical question with evidence:
+                    where exactly is work stalling, and what should the team fix first?
+                  </p>
+                  <div style={{ marginTop: 14, display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+                    <a className="link-chip" href={FOUNDER_LINKEDIN_URL} target="_blank" rel="noreferrer noopener">
+                      <i className="fa-brands fa-linkedin" aria-hidden /> LinkedIn
+                    </a>
+                    <span className="link-chip">Currently building the core team</span>
+                  </div>
                 </div>
               </div>
             </AnimatedSection>
@@ -94,6 +107,9 @@ export default function TeamPage() {
               <p className="fine" style={{ maxWidth: '50ch' }}>
                 Every engagement is backed by deep expertise across three pillars:
                 operations, data analytics, and systems integration.
+              </p>
+              <p className="fine" style={{ maxWidth: '50ch' }}>
+                Today this is a founder-led firm supported by a specialist network. The site now states that directly rather than implying a larger in-house team than exists.
               </p>
             </div>
           </AnimatedSection>
@@ -127,7 +143,8 @@ export default function TeamPage() {
                 <p className="fine" style={{ maxWidth: '50ch', margin: '0 auto 20px' }}>
                   We&apos;re looking for practitioners who think in constraints, not frameworks.
                   If you&apos;ve spent time inside real operations and want to help businesses
-                  find their bottleneck, we want to talk.
+                  find their bottleneck, we want to talk. Priority roles include data diagnostics,
+                  process analysis, and systems integration support.
                 </p>
                 <a className="btn primary" href="mailto:contact@alkhai.com?subject=Joining%20Alkhai">
                   <i className="fa-solid fa-envelope" aria-hidden /> Get in touch

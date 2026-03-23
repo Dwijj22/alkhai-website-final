@@ -44,11 +44,11 @@ export default function Differentiation() {
                 <span className="dot" />
                 Differentiation
               </div>
-              <h2>ALKHAI vs traditional operations consulting programs</h2>
+              <h2>Alkhai vs traditional operations consulting programs</h2>
             </div>
             <div>
               <p className="fine">
-                Large initiatives often start with tooling, templates, and broad transformation roadmaps. ALKHAI
+                Large initiatives often start with tooling, templates, and broad transformation roadmaps. Alkhai
                 starts with flow: what actually happens, where work waits, and which constraint limits
                 throughput — then builds a narrow execution path around that signal.
               </p>
@@ -61,7 +61,7 @@ export default function Differentiation() {
             <thead>
               <tr>
                 <th>Typical large ops program</th>
-                <th>ALKHAI</th>
+                <th>Alkhai</th>
               </tr>
             </thead>
             <tbody>
@@ -74,7 +74,7 @@ export default function Differentiation() {
                     {row.left}
                   </td>
                   <td>
-                    <span className="check" aria-label="ALKHAI approach">
+                    <span className="check" aria-label="Alkhai approach">
                       ✓
                     </span>{' '}
                     {row.right}

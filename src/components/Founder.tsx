@@ -1,6 +1,8 @@
 'use client';
 
 import AnimatedSection from '@/components/AnimatedSection';
+import Image from 'next/image';
+import { FOUNDER_LINKEDIN_URL } from '@/lib/constants';
 
 export default function Founder() {
   return (
@@ -11,23 +13,45 @@ export default function Founder() {
             <div>
               <div className="eyebrow">
                 <span className="dot" />
-                Why Data-Driven
+                Founder Note
               </div>
-              <h2>Built to answer the question operators ask every day.</h2>
+              <h2>Why Alkhai exists.</h2>
             </div>
             <p className="fine" style={{ maxWidth: '62ch' }}>
-              Where exactly are we losing time — and what should we fix first?
+              A founder statement grounded in operating reality, not broad transformation language.
             </p>
           </div>
         </AnimatedSection>
 
         <AnimatedSection delay={0.12}>
-          <div className="panel">
-            <p>
-              ALKHAI was built to deliver constraint-first diagnostics using real event data — not
-              frameworks, not assumptions. We focus on pinpointing the few fixes that actually move
-              throughput.
-            </p>
+          <div className="panel founder-panel">
+            <div className="founder-photo-wrap">
+              <Image
+                src="/dwij-founder.jpeg"
+                alt="Dwij Ravikumar"
+                width={320}
+                height={320}
+                className="founder-photo"
+              />
+            </div>
+            <div>
+              <p style={{ color: '#fff', fontSize: '1.08rem', lineHeight: 1.8 }}>
+                &quot;I built Alkhai after seeing the same failure pattern repeatedly: teams were drowning in
+                dashboards, workshops, and transformation plans, but nobody could point to the one queue or
+                handoff actually limiting throughput. The gap was never data volume. It was diagnostic
+                precision. Alkhai exists to identify that constraint quickly, show the evidence in operating
+                terms, and give leaders a ranked plan they can act on without a platform reset.&quot;
+              </p>
+              <div style={{ marginTop: 18 }}>
+                <b style={{ display: 'block', marginBottom: 4, fontSize: '1.05rem' }}>Dwij Ravikumar</b>
+                <span className="fine" style={{ display: 'block', marginBottom: 12 }}>
+                  Founder, Alkhai
+                </span>
+                <a className="link-chip" href={FOUNDER_LINKEDIN_URL} target="_blank" rel="noreferrer noopener">
+                  <i className="fa-brands fa-linkedin" aria-hidden /> View LinkedIn
+                </a>
+              </div>
+            </div>
           </div>
         </AnimatedSection>
       </div>

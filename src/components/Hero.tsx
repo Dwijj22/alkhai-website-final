@@ -3,8 +3,7 @@
 import { useId } from 'react';
 import { motion } from 'framer-motion';
 import AnimatedSection from '@/components/AnimatedSection';
-
-const CALENDLY_URL = 'https://calendly.com/dwijravikumar/alkhai-initial-meeting';
+import { CALENDLY_URL } from '@/lib/constants';
 
 export default function Hero() {
   const gradId = useId().replace(/:/g, '');
@@ -56,10 +55,6 @@ export default function Hero() {
                 <i className="fa-solid fa-arrow-right" aria-hidden />
                 Request a Bottleneck Scan
               </a>
-              <a className="btn" href="/deliverables">
-                <i className="fa-solid fa-chart-line" aria-hidden />
-                View deliverables
-              </a>
               <a
                 className="btn ghost book-cta"
                 href={CALENDLY_URL}
@@ -72,16 +67,6 @@ export default function Hero() {
             </div>
           </AnimatedSection>
 
-          <AnimatedSection delay={0.2}>
-            <div className="hero-trust">
-              <div className="trust-row">
-                <span className="pill">
-                  <i className="fa-solid fa-stopwatch" aria-hidden />
-                  <b>30–45 day</b> fixed-scope diagnostic
-                </span>
-              </div>
-            </div>
-          </AnimatedSection>
         </div>
 
         <AnimatedSection delay={0.14} className="hero-visual" direction="left">
@@ -143,10 +128,6 @@ export default function Hero() {
                     <span>throughput</span>
                   </div>
                 </div>
-                <p className="fine" style={{ marginTop: 12, color: 'rgba(199,206,217,0.75)', fontSize: '0.88rem' }}>
-                  Note: Illustrative diagnostic outputs based on historical event data. Actual results vary by workflow
-                  and data quality.
-                </p>
               </div>
 
               <div className="card">

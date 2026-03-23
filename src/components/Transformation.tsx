@@ -17,16 +17,16 @@ const METRICS: MetricRow[] = [
   { label: 'Throughput', before: '62%', after: '91%', beforeColor: '#FF3B5C', afterColor: '#3DDC97', icon: 'fa-solid fa-gauge-high' },
   { label: 'Cycle Time', before: '18.4 days', after: '7.2 days', beforeColor: '#FF3B5C', afterColor: '#3DDC97', icon: 'fa-solid fa-clock' },
   { label: 'Rework Rate', before: '38%', after: '9%', beforeColor: '#FF3B5C', afterColor: '#3DDC97', icon: 'fa-solid fa-rotate' },
-  { label: 'SLA Compliance', before: '64%', after: '96%', beforeColor: '#FFB020', afterColor: '#3DDC97', icon: 'fa-solid fa-shield-check' },
+  { label: 'SLA Compliance', before: '64%', after: '96%', beforeColor: '#FFB020', afterColor: '#3DDC97', icon: 'fa-solid fa-certificate' },
   { label: 'Cost Leakage', before: '$420K/yr', after: '$62K/yr', beforeColor: '#FF3B5C', afterColor: '#3DDC97', icon: 'fa-solid fa-dollar-sign' },
   { label: 'Deadline Hit Rate', before: '58%', after: '94%', beforeColor: '#FFB020', afterColor: '#3DDC97', icon: 'fa-solid fa-bullseye' },
 ];
 
 const OUTCOMES = [
-  { value: '+47%', label: 'Throughput Increase', icon: 'fa-solid fa-arrow-trend-up' },
-  { value: '-61%', label: 'Cycle Time Reduction', icon: 'fa-solid fa-bolt' },
-  { value: '$358K', label: 'Annual Savings', icon: 'fa-solid fa-piggy-bank' },
-  { value: '3.2x', label: 'ROI in First Year', icon: 'fa-solid fa-chart-line' },
+  { value: 47, label: 'Throughput Increase', icon: 'fa-solid fa-arrow-trend-up', prefix: '+', suffix: '%' },
+  { value: 61, label: 'Cycle Time Reduction', icon: 'fa-solid fa-bolt', prefix: '-', suffix: '%' },
+  { value: 358, label: 'Annual Savings', icon: 'fa-solid fa-piggy-bank', prefix: '$', suffix: 'K' },
+  { value: 3.2, label: 'ROI in First Year', icon: 'fa-solid fa-chart-line', prefix: '', suffix: 'x' },
 ];
 
 function AnimatedBar({ targetWidth, color, delay }: { targetWidth: number; color: string; delay: number }) {
@@ -77,6 +77,58 @@ function FlipNumber({ before, after, beforeColor, afterColor }: { before: string
   );
 }
 
+function AnimatedOutcomeValue({
+  value,
+  prefix,
+  suffix,
+}: {
+  value: number;
+  prefix: string;
+  suffix: string;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: '-50px' });
+  const [displayValue, setDisplayValue] = useState(0);
+
+  useEffect(() => {
+    if (!inView) return;
+
+    let frame = 0;
+    const duration = 1500;
+    const start = performance.now();
+
+    function animate(now: number) {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const overshoot = progress < 0.84 ? 1.05 : 1;
+      const nextValue = Math.min(value, value * eased * overshoot);
+      setDisplayValue(nextValue);
+
+      if (progress < 1) {
+        frame = requestAnimationFrame(animate);
+      } else {
+        setDisplayValue(value);
+      }
+    }
+
+    frame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(frame);
+  }, [inView, value]);
+
+  const formatted = value % 1 === 0 ? Math.round(displayValue).toString() : displayValue.toFixed(1);
+
+  return (
+    <strong
+      ref={ref}
+      style={{ fontFamily: '"Fraunces", Georgia, serif', fontSize: '2.2rem', color: '#3DDC97' }}
+    >
+      {prefix}
+      {formatted}
+      {suffix}
+    </strong>
+  );
+}
+
 export default function Transformation() {
   return (
     <section style={{ padding: '86px 0' }}>
@@ -85,11 +137,11 @@ export default function Transformation() {
           <div className="section-head" style={{ marginBottom: 36 }}>
             <div>
               <div className="eyebrow"><span className="dot" /> The Impact</div>
-              <h2>What happens after we find your bottleneck.</h2>
+              <h2>What Alkhai measures once a bottleneck is exposed.</h2>
             </div>
             <p className="fine" style={{ maxWidth: '52ch' }}>
-              Real operational metrics before and after an Alkhai diagnostic.
-              Watch the numbers flip from red to green.
+              These are the operating signals a constraint-first diagnostic tracks: throughput,
+              cycle time, rework, SLA performance, leakage, and deadline reliability.
             </p>
           </div>
         </AnimatedSection>
@@ -149,7 +201,7 @@ export default function Transformation() {
         </AnimatedSection>
 
         {/* Outcome cards */}
-        <div className="metrics" style={{ gridTemplateColumns: 'repeat(4, minmax(0,1fr))', marginTop: 24 }}>
+        <div className="metrics impact-outcomes" style={{ marginTop: 24 }}>
           {OUTCOMES.map((o, i) => (
             <AnimatedSection key={o.label} delay={0.2 + i * 0.1}>
               <div className="metric" style={{ textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
@@ -158,20 +210,13 @@ export default function Transformation() {
                   background: 'linear-gradient(90deg, var(--electric), var(--teal))',
                 }} />
                 <i className={o.icon} style={{ fontSize: '1.3rem', color: 'var(--teal)', marginBottom: 8, display: 'block' }} aria-hidden />
-                <strong style={{ fontFamily: '"Fraunces", Georgia, serif', fontSize: '2.2rem', color: '#3DDC97' }}>
-                  {o.value}
-                </strong>
+                <AnimatedOutcomeValue value={o.value} prefix={o.prefix} suffix={o.suffix} />
                 <span>{o.label}</span>
               </div>
             </AnimatedSection>
           ))}
         </div>
 
-        <AnimatedSection delay={0.5}>
-          <p className="fine" style={{ textAlign: 'center', marginTop: 20, maxWidth: '60ch', marginLeft: 'auto', marginRight: 'auto' }}>
-            Illustrative outcomes based on diagnostic engagements. Actual results vary by workflow complexity and data quality.
-          </p>
-        </AnimatedSection>
       </div>
     </section>
   );

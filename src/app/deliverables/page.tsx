@@ -2,8 +2,14 @@ import type { Metadata } from 'next';
 import PageHero from '@/components/PageHero';
 import Platform from '@/components/Platform';
 import CTABanner from '@/components/CTABanner';
+import { createPageMetadata } from '@/lib/metadata';
 
-export const metadata: Metadata = { title: 'Deliverables' };
+export const metadata: Metadata = createPageMetadata({
+  title: 'Deliverables',
+  description:
+    'See the executive readouts, process maps, ranked constraints, and roadmap outputs a bottleneck scan delivers.',
+  path: '/deliverables',
+});
 
 export default function DeliverablesPage() {
   return (

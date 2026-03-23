@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import AnimatedSection from './AnimatedSection';
+import { CALENDLY_URL } from '@/lib/constants';
 
 export default function CTABanner() {
   return (
@@ -21,7 +22,7 @@ export default function CTABanner() {
                 </Link>
                 <a
                   className="btn ghost book-cta"
-                  href="https://calendly.com/dwijravikumar/alkhai-initial-meeting"
+                  href={CALENDLY_URL}
                   target="_blank"
                   rel="noreferrer noopener"
                 >

@@ -2,6 +2,7 @@
 
 import { FormEvent, useRef, useState } from 'react';
 import AnimatedSection from '@/components/AnimatedSection';
+import { CALENDLY_URL } from '@/lib/constants';
 
 export default function Contact() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -45,7 +46,9 @@ export default function Contact() {
               respond with a scoped bottleneck scan and a data-focused plan.
             </p>
             <p className="fine" style={{ maxWidth: '60ch' }}>
-              We do not sell software licenses or long-term transformation programs.
+              We review every inquiry within 1 business day. If your workflow has the right data
+              characteristics for a diagnostic, we&apos;ll respond with a scoping call and a brief
+              data-viability checklist.
             </p>
             <p className="fine" style={{ maxWidth: '60ch' }}>
               No platform changes. Read-only access. NDA available. No long-term engagement
@@ -116,7 +119,7 @@ export default function Contact() {
                   </a>{' '}
                   <a
                     className="link-chip book-cta"
-                    href="https://calendly.com/dwijravikumar/alkhai-initial-meeting"
+                    href={CALENDLY_URL}
                     target="_blank"
                     rel="noreferrer noopener"
                   >

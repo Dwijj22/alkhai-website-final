@@ -1,25 +1,23 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
+import alkhaiLogoBlue from '../../AlkhaiLogoBlue.jpeg';
 
 export default function Footer() {
   return (
     <footer>
       <div className="container footer-inner">
-        <div className="footer-left">
-          <Link href="/" aria-label="Back to home">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/Alkhai_Footer.png" alt="Alkhai logo" style={{ width: 120, height: 'auto', opacity: 0.92 }} />
+        <div className="footer-top">
+          <Link href="/" aria-label="Back to home" className="footer-brand">
+            <Image src={alkhaiLogoBlue} alt="Alkhai logo" width={120} />
           </Link>
-          <span>© 2025 Alkhai — Operational Intelligence</span>
+          <span className="footer-meta">
+            © {new Date().getFullYear()} ALKHAI — Operational Process Intelligence
+          </span>
         </div>
+
         <div className="footer-links">
-          <Link className="link-chip" href="/deliverables">Deliverables</Link>
-          <Link className="link-chip" href="/scan">Bottleneck Scan</Link>
-          <Link className="link-chip" href="/why-alkhai">Why Alkhai</Link>
-          <Link className="link-chip" href="/about">About Us</Link>
-          <Link className="link-chip" href="/team">Our Team</Link>
-          <Link className="link-chip" href="/contact">Contact</Link>
           <a className="link-chip" href="mailto:contact@alkhai.com">contact@alkhai.com</a>
           <a
             className="link-chip"
@@ -29,6 +27,9 @@ export default function Footer() {
           >
             <i className="fa-brands fa-linkedin" aria-hidden /> LinkedIn
           </a>
+          <Link className="link-chip" href="/privacy">Privacy</Link>
+          <Link className="link-chip" href="/terms">Terms</Link>
+          <span className="link-chip">© {new Date().getFullYear()} ALKHAI</span>
         </div>
       </div>
     </footer>
