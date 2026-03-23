@@ -1,0 +1,185 @@
+'use client';
+
+import { FormEvent, useRef, useState } from 'react';
+import AnimatedSection from '@/components/AnimatedSection';
+
+export default function Contact() {
+  const formRef = useRef<HTMLFormElement>(null);
+  const [showSuccess, setShowSuccess] = useState(false);
+
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = formRef.current;
+    if (!form) return;
+
+    const data = new FormData(form);
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { Accept: 'application/json' },
+      });
+      if (!res.ok) throw new Error('Form submit failed');
+      form.reset();
+      setShowSuccess(true);
+    } catch {
+      /* keep UX quiet on failure; formspree handles edge cases */
+    }
+  }
+
+  return (
+    <section id="contact" className="section-soft video-section reveal">
+
+      <div className="container">
+        <AnimatedSection>
+          <div className="section-head">
+            <div>
+              <div className="eyebrow">
+                <span className="dot" />
+                Contact Us
+              </div>
+              <h2>Request a Bottleneck Scan.</h2>
+            </div>
+            <p className="fine" style={{ maxWidth: '60ch' }}>
+              Tell us about the workflow you want to improve and where work is stalling. We&apos;ll
+              respond with a scoped bottleneck scan and a data-focused plan.
+            </p>
+            <p className="fine" style={{ maxWidth: '60ch' }}>
+              We do not sell software licenses or long-term transformation programs.
+            </p>
+            <p className="fine" style={{ maxWidth: '60ch' }}>
+              No platform changes. Read-only access. NDA available. No long-term engagement
+              required. If we don&apos;t find actionable constraints, you don&apos;t proceed.
+            </p>
+          </div>
+        </AnimatedSection>
+
+        <AnimatedSection delay={0.12}>
+          <div className="cta-box">
+            <div>
+              <div
+                className="panel soft"
+                style={{
+                  border: 'none',
+                  background: 'transparent',
+                  boxShadow: 'none',
+                  padding: 0,
+                }}
+              >
+                <h3 style={{ marginBottom: 12 }}>What to include</h3>
+                <div className="steps" style={{ marginTop: 0 }}>
+                  <div className="step">
+                    <div className="badge">
+                      <i className="fa-solid fa-building" aria-hidden />
+                    </div>
+                    <div>
+                      <b>Company + team</b>
+                      <p className="fine">
+                        Size, the systems involved (CRM/ERP/ticketing/spreadsheets), and stakeholders
+                        (Ops, Finance, Sales Ops, Support leadership).
+                      </p>
+                    </div>
+                  </div>
+                  <div className="step">
+                    <div className="badge">
+                      <i className="fa-solid fa-sitemap" aria-hidden />
+                    </div>
+                    <div>
+                      <b>Process scope</b>
+                      <p className="fine">
+                        Order-to-cash, support, onboarding, fulfillment, procurement, or a specific
+                        workflow.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="step">
+                    <div className="badge">
+                      <i className="fa-solid fa-bullseye" aria-hidden />
+                    </div>
+                    <div>
+                      <b>Outcome target</b>
+                      <p className="fine">
+                        Cycle time reduction, throughput increase, cost savings, fewer missed
+                        deadlines, or faster cash collection.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <p className="fine" style={{ marginTop: 14 }}>
+                  Prefer email?{' '}
+                  <a
+                    className="link-chip"
+                    href="mailto:contact@alkhai.com?subject=Request%20a%20Bottleneck%20Scan"
+                  >
+                    contact@alkhai.com
+                  </a>{' '}
+                  <a
+                    className="link-chip book-cta"
+                    href="https://calendly.com/dwijravikumar/alkhai-initial-meeting"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                  >
+                    <i className="fa-solid fa-calendar" aria-hidden /> Book a 30-minute intro
+                  </a>
+                </p>
+              </div>
+            </div>
+
+            <form
+              ref={formRef}
+              className="form"
+              id="contact-form"
+              action="https://formspree.io/f/mzdzkroe"
+              method="POST"
+              onSubmit={handleSubmit}
+            >
+              <label>
+                Name
+                <input name="name" type="text" autoComplete="name" placeholder="Name" required />
+              </label>
+              <label>
+                Work email
+                <input
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  placeholder="Work Email"
+                  required
+                />
+              </label>
+              <label>
+                Company
+                <input
+                  name="company"
+                  type="text"
+                  autoComplete="organization"
+                  placeholder="Company"
+                />
+              </label>
+              <label>
+                What problem are you trying to solve?
+                <textarea
+                  name="message"
+                  placeholder="What problem are you trying to solve?"
+                />
+              </label>
+              <button className="btn primary" type="submit">
+                <i className="fa-solid fa-paper-plane" aria-hidden /> Request a Scan
+              </button>
+              <div className="fine">No platform changes. Read-only access. NDA available.</div>
+              <div
+                className={`form-success${showSuccess ? ' show' : ''}`}
+                id="form-success"
+                role="status"
+                aria-live="polite"
+              >
+                Thank you, we will contact you soon.
+              </div>
+            </form>
+          </div>
+        </AnimatedSection>
+      </div>
+    </section>
+  );
+}

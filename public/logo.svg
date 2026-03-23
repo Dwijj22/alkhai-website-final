@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 120" fill="none">
+  <!-- Funnel icon -->
+  <g transform="translate(0, 5)">
+    <!-- Funnel bowl - elliptical opening -->
+    <ellipse cx="50" cy="18" rx="44" ry="14" fill="white"/>
+    <ellipse cx="50" cy="18" rx="44" ry="14" fill="none" stroke="#0a1128" stroke-width="2.5"/>
+    <ellipse cx="50" cy="15" rx="44" ry="12" fill="white"/>
+    <!-- Funnel body -->
+    <path d="M6 18 L42 82 L42 98 L38 108 L50 112 L62 108 L58 98 L58 82 L94 18" fill="white"/>
+    <path d="M6 18 L42 82 L42 98 L38 108 L50 112 L62 108 L58 98 L58 82 L94 18" fill="none" stroke="#0a1128" stroke-width="2.5"/>
+    <!-- Inner detail on spout -->
+    <rect x="46" y="84" width="4" height="20" rx="1" fill="#0a1128"/>
+  </g>
+  <!-- "Alkhai" text -->
+  <text x="115" y="82" font-family="'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif" font-size="72" font-weight="400" fill="white" letter-spacing="-1">Alkhai</text>
+</svg>
