@@ -5,6 +5,7 @@ import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import GlobalParticleMesh from '@/components/graphics/GlobalParticleMesh';
 import ProcessReport from '@/components/ProcessReport';
+import AlkhaiChatbot from '@/components/AlkhaiChatbot';
 import { defaultMetadata } from '@/lib/metadata';
 
 const sora = Sora({
@@ -69,6 +70,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="main-content">{children}</main>
         <Footer />
         <ProcessReport />
+	<AlkhaiChatbot />
       </body>
     </html>
   );
