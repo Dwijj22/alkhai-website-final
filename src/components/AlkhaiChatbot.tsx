@@ -114,7 +114,7 @@ const STYLES = `
 .akc-launcher {
   position: fixed;
   bottom: 28px;
-  right: 28px;
+  left: 28px;
   width: 68px;
   height: 68px;
   border-radius: 50%;
@@ -146,7 +146,7 @@ const STYLES = `
 }
 .akc-tooltip {
   position: absolute;
-  right: calc(100% + 14px);
+  left: calc(100% + 14px);
   top: 50%;
   transform: translateY(-50%);
   background: #151e42;
@@ -165,22 +165,22 @@ const STYLES = `
 .akc-tooltip::after {
   content: '';
   position: absolute;
-  left: 100%;
+  right: 100%;
   top: 50%;
   transform: translateY(-50%);
   border: 7px solid transparent;
-  border-left-color: #151e42;
+  border-right-color: #151e42;
 }
 @keyframes akcTooltipFloat {
   0%, 100% { transform: translateY(-50%) translateX(0); }
-  50% { transform: translateY(-50%) translateX(-4px); }
+  50% { transform: translateY(-50%) translateX(4px); }
 }
 .akc-launcher.akc-hidden .akc-tooltip { display: none; }
 
 .akc-panel {
   position: fixed;
   bottom: 28px;
-  right: 28px;
+  left: 28px;
   width: 420px;
   max-width: calc(100vw - 32px);
   height: 640px;
@@ -197,7 +197,7 @@ const STYLES = `
   opacity: 0;
   pointer-events: none;
   transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease;
-  transform-origin: bottom right;
+  transform-origin: bottom left;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   color: #fff;
 }
@@ -702,8 +702,8 @@ const STYLES = `
   .akc-panel { width: 400px; height: 620px; }
 }
 @media (max-width: 768px) {
-  .akc-panel { width: 380px; height: 600px; bottom: 20px; right: 20px; }
-  .akc-launcher { width: 62px; height: 62px; bottom: 20px; right: 20px; }
+  .akc-panel { width: 380px; height: 600px; bottom: 20px; left: 20px; }
+  .akc-launcher { width: 62px; height: 62px; bottom: 20px; left: 20px; }
 }
 @media (max-width: 600px) {
   .akc-panel {
@@ -713,7 +713,7 @@ const STYLES = `
     max-width: 100vw; max-height: 100dvh;
     border-radius: 0; border: none;
   }
-  .akc-launcher { width: 58px; height: 58px; bottom: 18px; right: 18px; }
+  .akc-launcher { width: 58px; height: 58px; bottom: 18px; left: 18px; }
   .akc-tooltip { display: none; }
   .akc-header { padding: 16px 18px; }
   .akc-input-field { font-size: 16px; padding: 13px 14px; }
@@ -732,7 +732,7 @@ const STYLES = `
   @media (max-width: 600px) {
     .akc-launcher {
       bottom: max(18px, env(safe-area-inset-bottom));
-      right: max(18px, env(safe-area-inset-right));
+      left: max(18px, env(safe-area-inset-left));
     }
   }
 }
